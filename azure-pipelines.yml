@@ -1,0 +1,16 @@
+stages:
+- stage: Stage1
+  jobs:
+  - deployment: DeployLatest
+    environment: <environment-name>
+  ...
+  - job: UpdateChangeRequest
+    steps:
+    - task: UpdateServiceNowChangeRequest@2
+      displayName: 'Update ServiceNow Change Request'
+      inputs:
+        ServiceNowConnection: '<service-connection-name>'
+        NewStatus: '<status-to-set>'
+        WorkNotes: '<work-notes-for-change-request>'
+        otherParameters: '{"u_<field-name>": "<valid-value>"}'
+pool: server
